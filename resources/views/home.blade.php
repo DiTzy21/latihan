@@ -21,10 +21,37 @@
                         {{$barang->keterangan}}
                     </p>
                     <a href="{{url('pesan')}}/{{$barang->id}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Pesan</a>
+                    <button class="btn btn-secondary whishlist-btn" data-product-id="{{$barang->id}}"><i class="fa fa-heart"></i>Add to Whishlist</button>
                 </div>
             </div>
         </div>
         @endforeach
     </div>
+
 </div>
+<script>
+    $(document).ready(function() {
+        // Add click event listener to all wishlist buttons
+        $('.whishlist-btn').click(function() {
+            // Get the product ID from the data attribute
+            var productId = $(this).data('product-id');
+            // Send AJAX request to add the product to the wishlist
+            $.ajax({
+                url: "{{url('wishlist/store')}}",
+                method: 'POST',
+                data: {
+                    '_token': "{{ csrf_token() }}",
+                    'product_id': productId
+                },
+                success: function(response) {
+                    // Show success message
+                    window.location.href = window.location.pathname
+                },
+                error: function(response) {
+                    alert('An error occurred while adding to whishlist.');
+                }
+            });
+        });
+    });
+</script>
 @endsection

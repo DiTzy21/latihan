@@ -26,3 +26,6 @@ Route::post('pesan/{id}', [PesanController::class, 'pesan']);
 Route::get('check-out', [PesanController::class, 'check_out']);
 Route::delete('check-out/{id}', [PesanController::class, 'delete']);
 Route::get('konfirmasi-check-out',[PesanController::class,'konfirmasi']);
+Route::get('wishlist', [App\Http\Controllers\WishlistController::class, 'index'])->name('wishlist.index');
+Route::post('wishlist/store', [App\Http\Controllers\WishlistController::class, 'store']);
+Route::delete('wishlist/delete/{id}', [App\Http\Controllers\WishlistController::class, 'delete'])->name('wishlist.delete');
