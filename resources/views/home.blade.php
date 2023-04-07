@@ -21,7 +21,11 @@
                         {{$barang->keterangan}}
                     </p>
                     <a href="{{url('pesan')}}/{{$barang->id}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Pesan</a>
-                    <button class="btn btn-secondary whishlist-btn" data-product-id="{{$barang->id}}"><i class="fa fa-heart"></i>Add to Whishlist</button>
+                    <form action="wishlist/store" method="post">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{$barang->id}}">
+                    <button class="btn btn-secondary" type="submit" data-product-id="{{$barang->id}}"><i class="fa fa-heart"></i>Add to Whishlist</button>
+</form>
                 </div>
             </div>
         </div>

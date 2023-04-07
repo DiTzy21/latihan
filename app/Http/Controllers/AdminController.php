@@ -8,75 +8,70 @@ use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Log;
 
 class adminController extends Controller
 {
      public function index(Request $reqs) {
-        $product = DB::select('SELECT * FROM barangs');
-        return view('admin.productdb',['product' => $product]);
+        $barang = DB::select('SELECT * FROM barangs');
+        return view('admin.admin',['barang' => $barang]);
     }
     
     // for add the product
 
-    public function edit($product_id, Request $reqs) {
-        $product = DB::table('barangs')->where('id', $product_id)->first();
-        return view('admin.productedit', ['product' => $product]);
+    public function edit($id, Request $reqs) {
+        $barang = DB::table('barangs')->where('id', $id)->first();
+        return view('admin.edit', ['barang' => $barang]);
     }
 
 
  public function update(Request $request) {
-    $product_id = $request->input('product_id');
-    $title = $request->input('title');
-    $image = $request->input('image');
-    $price = $request->input('price');
-    $design_id = $request->input('design_id');
-    $stock = $request->input('stock');
-    $description = $request->input('description');
+    $id = $request->input('id');
+    $nama_barang = $request->input('nama_barang');
+    $gambar = $request->input('gambar');
+    $harga = $request->input('harga');
+    $stok = $request->input('stok');
+    $keterangan = $request->input('keterangan');
 
     DB::update('UPDATE product SET 
         product_id = ?, 
-        title = ?, 
-        image = ?,
-        price = ?, 
-        design_id = ?,
-        stock = ?,
-        description = ?, 
+        nama_barang = ?, 
+        gambar = ?,
+        harga = ?, 
+        stok = ?,
+        keterangan = ?, 
         created_at = NOW()
     WHERE product_id = ?', 
-    [$product_id, $title, $image, $price, $design_id, $stock, $description, $product_id]);
+    [$id, $nama_barang, $gambar, $harga, $stok, $keterangan, $id]);
    
-  return redirect('/admin/product');
+  return redirect('/admin/admin');
 }
 
-public function delete($product_id) {
-    DB::table('product')->where('product_id', $product_id)->delete();
+public function delete($id) {
+    DB::table('barangs')->where('id', $id)->delete();
     return redirect()->back()->with('success', 'Product deleted successfully.');
     }
 
-public function add($product_id, Request $reqs) {
-    $product = DB::table('product')->where('product_id', $product_id)->first();
-    return view('admin.productadd', ['product' => $product]);
+public function add($id, Request $reqs) {
+    $product = DB::table('barangs')->where('id', $id)->first();
+    return view('admin.add', ['id' => $id]);
 }
 
  public function store(Request $request)
     {
-        $product_id = $request->input('product_id');
-        $title = $request->input('title');
-        $image = $request->input('image');
-        $price = $request->input('price');
-        $design_id = $request->input('design_id');
-        $stock = $request->input('stock');
-        $description = $request->input('description');
+        $nama_barang = $request->input('nama_barang');
+        $gambar = $request->input('gambar');
+        $harga = $request->input('harga');
+        $stok = $request->input('stok');
+        $keterangan = $request->input('keterangan');
         
-        DB::table('product')->insert([
-            'product_id' => $product_id,
-            'title' => $title,
-            'image' => $image,
-            'price' => $price,
-            'design_id' => $design_id,
-            'stock' => $stock,
-            'description' => $description
+        Log::debug($nama_barang);
+        DB::table('barangs')->insert([
+            'nama_barang' => $nama_barang,
+            'gambar' => $gambar,
+            'harga' => $harga,
+            'stok' => $stok,
+            'keterangan' => $keterangan
         ]);        
         return redirect('/admin/product');
     }

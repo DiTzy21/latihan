@@ -17,6 +17,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -37,11 +38,11 @@
                             <a class="nav-link" href="{{ url('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('check-out') }}">Product</a>
+                            <a class="nav-link" href="{{ url('') }}">Product</a>
                         </li>
                         @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('history') }}">History</a>
+                            <a class="nav-link" href="{{ url('history') }}">Wishlist</a>
                         </li>
                         @endauth
                     </ul>

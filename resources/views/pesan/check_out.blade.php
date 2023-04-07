@@ -57,7 +57,7 @@
                                 <td colspan="4" align="right"><strong>Total Price :</strong></td>
                                 <td><strong>Rp. {{number_format($pesanan->jumlah_harga)}}</strong></td>
                                 <td>
-                                    <a href="{{url('konfirmasi-check-out')}}" class="btn btn-success"><i class="fa fa-shopping-cart"></i>Check Out</a>
+                                        <button type="button" id="check-out-btn" class="btn btn-success btn-sm"><i class="fa fa-shopping-cart"></i>Check Out</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -69,4 +69,47 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        // Add click event listener to all wishlist buttons
+        $('#check-out-btn').click(function() {
+            // Get the product ID from the data attribute
+            // Send AJAX request to add the product to the wishlist
+            $.ajax({
+                url: "{{url('check-out')}}",
+                method: 'POST',
+                data: {
+                    '_token': "{{ csrf_token() }}"
+                },
+                success: async function(response) {
+                    // Show success message
+                    var { value: description } = await Swal.fire({
+                        title: 'Comment our product',
+                        input: 'textarea',
+                        showCancelButton: true,
+                    });
+                    $.ajax({
+                        url: "{{url('product-comments')}}",
+                        method: 'POST',
+                        data: {
+                            '_token': "{{ csrf_token() }}",
+                            description: description,
+                            product_ids: response.ids
+                        },
+                        success: async function(response) {
+                            // Show success message
+                            window.location.href = "{{url('/home')}}"
+                        },
+                        error: function(response) {
+                            alert('An error occurred.');
+                        }
+                    });
+                },
+                error: function(response) {
+                    alert('An error occured.');
+                }
+            });
+        });
+    });
+</script>
 @endsection

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
+
 class WishlistController extends Controller
 {
     public function index()
@@ -22,7 +23,8 @@ class WishlistController extends Controller
         $whishlist->user_id = Auth::id();
         $whishlist->product_id = $request->product_id;
         $whishlist->save();
-        return redirect()->back()->with('success', 'Product added to whishlist.');
+        return redirect('home')->with('success', 'Product added to whishlist.');
+        
     }
 
     public function destroy($id)

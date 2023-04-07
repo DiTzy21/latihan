@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\Barang;
-use App\Http\Controller\DB;
 use App\Models\Pesanan;
 use App\Models\PesananDetail;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PesanController extends Controller
 {
@@ -119,9 +121,21 @@ class PesanController extends Controller
     public function konfirmasi()
     {
         $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 0)->first();
-        $pesanan->status = 1;
+        $pesanan->status = 0;
         $pesanan->update();
+        $ids = DB::select("SELECT * FROM pesanan_details WHERE pesanan_id = ?", [$pesanan->id]);
+        $data = $this->getIds($ids);
+        // Alert::question('Question Title', 'Question Message');
+        // return alert()->question('Apakah kamu puas ? ','lorem,lorem');
+        return response()->json(["ids" => $data]);
+       
+    }
 
-        return redirect('check-out')->with('success', 'Buyed Succesfull');;
+    public function getIds($ids) {
+        $data = [];
+        foreach($ids as $id) {
+            $data[] = $id->barang_id;
+        }
+        return $data;
     }
 }
