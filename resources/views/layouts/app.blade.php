@@ -34,17 +34,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                            <a class="nav-link" href="{{ url('home') }}">Home</a>
+                    
+                    </ul>
+                    <ul class="navbar-nav mx-auto">
+                    <li class="nav-item ms-5">
+                            <a class="nav-link text-white"   href="{{url('home')}}">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('') }}">Product</a>
+                        <li class="nav-item ms-5 " >
+                            <a class="nav-link text-white" href="{{url('product')}}">Product</a>
                         </li>
-                        @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('history') }}">Wishlist</a>
+                        <li class="nav-item ms-5 " >
+                            <a class="nav-link text-white" href="{{ url('history') }}">History</a>
                         </li>
-                        @endauth
+
+
+                        
+                       
                     </ul>
 
                     <!-- Right Side Of Navbar -->
