@@ -28,7 +28,7 @@
                             <table class="table table-striped">
                                 <tbody>
                                     <tr class="table-primary">
-                                        <td>Harga</td>
+                                        <td>Price</td>
                                         <td>:</td>
                                         <td>Rp. {{number_format($barang->harga)}}</td>
 
@@ -40,14 +40,14 @@
 
                                     </tr>
                                     <tr class="table-primary">
-                                        <td>Keterangan</td>
+                                        <td>Description</td>
                                         <td>:</td>
                                         <td>{{$barang->keterangan}}</td>
 
                                     </tr>
 
                                     <tr>
-                                        <td>Jumlah Pesan</td>
+                                        <td>Quantity</td>
                                         <td>:</td>
                                         <td>
                                             <form method="post" action="{{url('pesan')}}/{{$barang->id}}">

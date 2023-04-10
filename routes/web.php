@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PesanController;
+use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\adminController;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -27,9 +28,9 @@ Route::post('pesan/{id}', [PesanController::class, 'pesan']);
 Route::get('check-out', [PesanController::class, 'check_out']);
 Route::delete('check-out/{id}', [PesanController::class, 'delete']);
 Route::post('check-out',[PesanController::class,'konfirmasi']);
-Route::get('wishlist', [App\Http\Controllers\WishlistController::class, 'index'])->name('wishlist.index');
-Route::post('wishlist/store', [App\Http\Controllers\WishlistController::class, 'store']);
-Route::delete('wishlist/delete/{id}', [App\Http\Controllers\WishlistController::class, 'delete'])->name('wishlist.delete');
+Route::get('wishlist', [App\Http\Controllers\FavouriteController::class, 'index'])->name('wishlist.index');
+Route::post('wishlist/store', [App\Http\Controllers\FavouriteController::class, 'store']);
+Route::delete('wishlist/delete/{id}', [App\Http\Controllers\FavouriteController::class, 'delete'])->name('wishlist.delete');
 Route::get('comments', [App\Http\Controllers\ProductCommentController::class, 'index'])->name('product.comments.index');
 Route::post('product-comments', [App\Http\Controllers\ProductCommentController::class, 'store'])->name('product-comments.store');
 Route::delete('product-comments/{id}', [App\Http\Controllers\ProductCommentController::class, 'destroy'])->name('product-comments.destroy');

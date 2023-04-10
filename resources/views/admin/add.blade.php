@@ -1,13 +1,17 @@
+@extends('layouts.app')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create New Product</title>
+    <title>Chick.CO New Product</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+
 <body>
+@section('content')
     <div class="container mt-5">
         <h1>New Product</h1>
 
@@ -43,4 +47,5 @@
         </form>
     </div>
 </body>
+@endsection
 </html>

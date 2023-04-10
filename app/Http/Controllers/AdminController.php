@@ -33,18 +33,21 @@ class adminController extends Controller
     $stok = $request->input('stok');
     $keterangan = $request->input('keterangan');
 
-    DB::update('UPDATE product SET 
-        product_id = ?, 
+    //debug
+
+    
+    DB::update('UPDATE barangs SET 
+         
         nama_barang = ?, 
         gambar = ?,
         harga = ?, 
         stok = ?,
         keterangan = ?, 
         created_at = NOW()
-    WHERE product_id = ?', 
-    [$id, $nama_barang, $gambar, $harga, $stok, $keterangan, $id]);
+    WHERE id = ?', 
+    [ $nama_barang, $gambar, $harga, $stok, $keterangan, $id]);
    
-  return redirect('/admin/admin');
+  return redirect('/admin/product')->with('success', 'Product Edit Successful ! ');;
 }
 
 public function delete($id) {
@@ -54,7 +57,7 @@ public function delete($id) {
 
 public function add($id, Request $reqs) {
     $product = DB::table('barangs')->where('id', $id)->first();
-    return view('admin.add', ['id' => $id]);
+    return view('admin.add', ['id' => $id])->with('success', 'Product Added successfully.');
 }
 
  public function store(Request $request)

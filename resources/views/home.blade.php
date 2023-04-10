@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12 mb-5">
-            <img src="{{url('images/logo.png')}}" class="rounded mx-auto d-block" width="500" alt="">
+            <img src="{{url('images/logo2.png')}}" class="rounded mx-auto d-block" width="200" alt="">
         </div>
         @foreach($barangs as $barang)
         <div class="col-md-4">
@@ -14,17 +14,17 @@
                 <div class="card-body">
                     <h5 class="card-title">{{$barang->nama_barang}}</h5>
                     <p class="card-text">
-                        <strong>Harga :</strong> Rp. {{number_format($barang->harga)}}<br>
+                        <strong>Price :</strong> Rp. {{number_format($barang->harga)}}<br>
                         <strong>Stock :</strong> {{$barang->stok}}<br>
                         <hr>
-                        <strong>Keterangan :</strong> <br>
+                        <strong>Description :</strong> <br>
                         {{$barang->keterangan}}
                     </p>
-                    <a href="{{url('pesan')}}/{{$barang->id}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Pesan</a>
+                    <a href="{{url('pesan')}}/{{$barang->id}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Order</a>
                     <form action="wishlist/store" method="post">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$barang->id}}">
-                    <button class="btn btn-secondary" type="submit" data-product-id="{{$barang->id}}"><i class="fa fa-heart"></i>Add to Whishlist</button>
+                    <button class="btn btn-secondary" type="submit" data-product-id="{{$barang->id}}"><i class="fa fa-heart"></i>Add to Favourite</button>
 </form>
                 </div>
             </div>

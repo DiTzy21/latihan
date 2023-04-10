@@ -79,7 +79,7 @@ class PesanController extends Controller
 
 
         
-        return redirect('check-out')->with('success', 'Task Created Successfully!');;
+        return redirect('check-out')->with('success', 'Successfully Added to Cart 🛒🛒');;
     }
     public function check_out()
 {
@@ -115,13 +115,17 @@ class PesanController extends Controller
 
     $pesanan_detail->delete();
 
-    return redirect("check-out")->with('success', 'Cancellation Succes');
+    return redirect("check-out")->with('success', 'Product Delete Successful ! ');
     }
 
     public function konfirmasi()
     {
+        // $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        // $pesanan->status = 0;
         $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 0)->first();
-        $pesanan->status = 0;
+        $pesanan->status = 1; // or whatever value indicates a submitted order
+        // $pesanan->update();
+
         $pesanan->update();
         $ids = DB::select("SELECT * FROM pesanan_details WHERE pesanan_id = ?", [$pesanan->id]);
         $data = $this->getIds($ids);
